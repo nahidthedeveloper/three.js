@@ -6,10 +6,10 @@ const scene = new THREE.Scene();
 const group = new THREE.Group();
 
 const box1 = new THREE.Mesh(
-    new THREE.BoxGeometry(2, 2, 2),
-    new THREE.MeshBasicMaterial({color: "yellow"})
+    new THREE.BoxGeometry(3, 3, 3, 6, 6, 6),
+    new THREE.MeshBasicMaterial({color: "purple", wireframe: true})
 );
-const axesHelper = new THREE.AxesHelper(5);
+const axesHelper = new THREE.AxesHelper(10);
 
 group.add(box1);
 scene.add(group);

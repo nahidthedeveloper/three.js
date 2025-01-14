@@ -7,7 +7,7 @@ const group = new THREE.Group();
 
 const box1 = new THREE.Mesh(
     new THREE.BoxGeometry(2, 2, 2),
-    new THREE.MeshBasicMaterial({color: "white"})
+    new THREE.MeshBasicMaterial({color: "yellow"})
 );
 const axesHelper = new THREE.AxesHelper(5);
 
@@ -28,8 +28,34 @@ const canvas = document.querySelector(".main");
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 
+window.addEventListener('resize', () => {
+    size.width = window.innerWidth;
+    size.height = window.innerHeight;
+    camera.aspect = size.width / size.height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(size.width, size.height);
+})
+
+window.addEventListener('dblclick', () => {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (canvas.requestFullscreen) {
+            canvas.requestFullscreen();
+        } else if (canvas.webkitRequestFullscreen) {
+            canvas.webkitRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
+});
+
+
 const renderer = new THREE.WebGLRenderer({canvas: canvas});
 renderer.setSize(size.width, size.height)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 // gsap.to(group.position, {x: -3, duration: 1, delay: 2})
 
